@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cd-demo-deployment
+  namespace: training
+  labels:
+    app: cd-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cd-demo
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: cd-demo
+    spec:
+      imagePullSecrets:
+        - name: cd-demo-acr-pull
+      containers:
+        - name: cd-demo
+          image: crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:v1
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
