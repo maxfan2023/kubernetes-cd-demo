@@ -1,0 +1,18 @@
+{
+  "build_number": 1,
+  "build_url": "http://localhost:8080/job/kubernetes-cd-demo/1/",
+  "result": "SUCCESS",
+  "commit": "1ff38fb17176f82335e325294c45edab0767b009",
+  "image_tag": "1ff38fb17176",
+  "pushed_digest": "sha256:78d432789f28456bb37d93221bff9627a05cd0ce4c71b4a3d14d02324f8ccc72",
+  "timestamp_ms": 1793161897485,
+  "duration_ms": 80689,
+  "pipeline_source": "SCM main/Jenkinsfile",
+  "stages": [
+    "Checkout",
+    "Validate",
+    "Build and Push Image",
+    "Deploy to Kubernetes",
+    "Verify"
+  ]
+}

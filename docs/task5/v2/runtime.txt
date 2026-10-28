@@ -1,0 +1,40 @@
+Task 5 v2: build #2, commit 64f2a5d31ea5a3da6ae53a5779c9d3d00fdef378
+
+deployment "cd-demo-deployment" successfully rolled out
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                                                               SELECTOR
+deployment.apps/cd-demo-deployment   3/3     3            3           11h   cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:64f2a5d31ea5   app=cd-demo
+
+NAME                                      READY   STATUS      RESTARTS   AGE    IP            NODE                         NOMINATED NODE   READINESS GATES
+pod/cd-demo-deployment-798549d49b-682l6   1/1     Running     0          12s    10.244.0.28   k8s-chapter1-control-plane   <none>           <none>
+pod/cd-demo-deployment-798549d49b-nf95l   1/1     Running     0          55s    10.244.0.26   k8s-chapter1-control-plane   <none>           <none>
+pod/cd-demo-deployment-798549d49b-nqf7l   1/1     Running     0          23s    10.244.0.27   k8s-chapter1-control-plane   <none>           <none>
+pod/cd-demo-deployment-86d87f45f7-cl5jq   0/1     Completed   0          3m2s   10.244.0.23   k8s-chapter1-control-plane   <none>           <none>
+
+NAME                                            DESIRED   CURRENT   READY   AGE    CONTAINERS   IMAGES                                                                                               SELECTOR
+replicaset.apps/cd-demo-deployment-7665ccbbfb   0         0         0       11h    cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:e7d1de9c1d35   app=cd-demo,pod-template-hash=7665ccbbfb
+replicaset.apps/cd-demo-deployment-798549d49b   3         3         3       55s    cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:64f2a5d31ea5   app=cd-demo,pod-template-hash=798549d49b
+replicaset.apps/cd-demo-deployment-84f975ffcd   0         0         0       31m    cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:f7a5d2d6dd33   app=cd-demo,pod-template-hash=84f975ffcd
+replicaset.apps/cd-demo-deployment-86d87f45f7   0         0         0       3m2s   cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176   app=cd-demo,pod-template-hash=86d87f45f7
+replicaset.apps/cd-demo-deployment-d8c68c948    0         0         0       11h    cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:4490e5590699   app=cd-demo,pod-template-hash=d8c68c948
+
+NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/cd-demo-service   ClusterIP   10.96.255.9   <none>        80/TCP    11h   app=cd-demo
+
+NAME                                        CLASS   HOSTS           ADDRESS       PORTS   AGE
+ingress.networking.k8s.io/cd-demo-ingress   nginx   cd-demo.local   10.96.59.62   80      11h
+
+deployment.apps/cd-demo-deployment 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+3         <none>
+4         <none>
+5         <none>
+
+
+PASS: all three Pods serve the exact v2 source page.
+
+PASS: Service and Ingress both return HTTP 200 and the exact source page.
+
+PASS: all temporary port-forward processes have been stopped.

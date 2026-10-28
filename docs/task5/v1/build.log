@@ -1,0 +1,596 @@
+Started by user max
+Obtained Jenkinsfile from git https://github.com/maxfan2023/kubernetes-cd-demo.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /Users/max/.jenkins/workspace/kubernetes-cd-demo
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] timeout
+[2026-10-28T04:31:43.977Z] Timeout set to expire in 20 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+[2026-10-28T04:31:44.092Z] Selected Git installation does not exist. Using Default
+[2026-10-28T04:31:44.095Z] The recommended git tool is: NONE
+[2026-10-28T04:31:44.096Z] using credential github-token
+[2026-10-28T04:31:44.104Z] Cloning the remote Git repository
+[2026-10-28T04:31:44.104Z] Cloning repository https://github.com/maxfan2023/kubernetes-cd-demo.git
+[2026-10-28T04:31:44.104Z]  > git init /Users/max/.jenkins/workspace/kubernetes-cd-demo # timeout=10
+[2026-10-28T04:31:44.118Z] Fetching upstream changes from https://github.com/maxfan2023/kubernetes-cd-demo.git
+[2026-10-28T04:31:44.118Z]  > git --version # timeout=10
+[2026-10-28T04:31:44.127Z]  > git --version # 'git version 2.54.0 (Apple Git-157)'
+[2026-10-28T04:31:44.127Z] using GIT_ASKPASS to set credentials github-token
+[2026-10-28T04:31:44.131Z]  > git fetch --tags --force --progress -- https://github.com/maxfan2023/kubernetes-cd-demo.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2026-10-28T04:31:46.968Z]  > git config remote.origin.url https://github.com/maxfan2023/kubernetes-cd-demo.git # timeout=10
+[2026-10-28T04:31:46.980Z]  > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2026-10-28T04:31:46.992Z] Avoid second fetch
+[2026-10-28T04:31:46.993Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2026-10-28T04:31:47.006Z] Checking out Revision 1ff38fb17176f82335e325294c45edab0767b009 (refs/remotes/origin/main)
+[2026-10-28T04:31:47.007Z]  > git config core.sparsecheckout # timeout=10
+[2026-10-28T04:31:47.018Z]  > git checkout -f 1ff38fb17176f82335e325294c45edab0767b009 # timeout=10
+[2026-10-28T04:31:47.033Z] Commit message: "Establish the v1 baseline for repeatable Jenkins SCM releases"
+[2026-10-28T04:31:47.034Z] First time build. Skipping changelog.
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T04:31:47.405Z] + git rev-parse --short=12 HEAD
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Validate)
+[Pipeline] sh
+[2026-10-28T04:31:47.874Z] + set -eu
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s app/index.html
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s app/Dockerfile
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s k8s/namespace.yaml
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s k8s/deployment.yaml
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s k8s/service.yaml
+[2026-10-28T04:31:47.875Z] + for file in app/index.html app/Dockerfile k8s/namespace.yaml k8s/deployment.yaml k8s/service.yaml k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + test -s k8s/ingress.yaml
+[2026-10-28T04:31:47.875Z] + grep -q 'Application version:' app/index.html
+[2026-10-28T04:31:47.875Z] + git --version
+[2026-10-28T04:31:47.875Z] git version 2.54.0 (Apple Git-157)
+[2026-10-28T04:31:47.875Z] + docker version
+[2026-10-28T04:31:47.875Z] Client:
+[2026-10-28T04:31:47.875Z]  Version:           29.9.2
+[2026-10-28T04:31:47.875Z]  API version:       1.56
+[2026-10-28T04:31:47.875Z]  Go version:        go1.26.10
+[2026-10-28T04:31:47.875Z]  Git commit:        a82e528
+[2026-10-28T04:31:47.875Z]  Built:             Tue Oct 20 18:43:59 2026
+[2026-10-28T04:31:47.875Z]  OS/Arch:           darwin/arm64
+[2026-10-28T04:31:47.875Z]  Context:           desktop-linux
+[2026-10-28T04:31:47.875Z] 
+[2026-10-28T04:31:47.875Z] Server: Docker Desktop 4.96.1 (244132)
+[2026-10-28T04:31:47.875Z]  Engine:
+[2026-10-28T04:31:47.875Z]   Version:          29.9.2
+[2026-10-28T04:31:47.875Z]   API version:      1.56 (minimum version 1.40)
+[2026-10-28T04:31:47.875Z]   Go version:       go1.26.10
+[2026-10-28T04:31:47.875Z]   Git commit:       0367cbe
+[2026-10-28T04:31:47.875Z]   Built:            Tue Oct 20 18:44:14 2026
+[2026-10-28T04:31:47.875Z]   OS/Arch:          linux/arm64
+[2026-10-28T04:31:47.875Z]   Experimental:     false
+[2026-10-28T04:31:47.875Z]  containerd:
+[2026-10-28T04:31:47.875Z]   Version:          v2.4.2
+[2026-10-28T04:31:47.875Z]   GitCommit:        b7a25261e029d68978bbf290df0a62fc819b3c51
+[2026-10-28T04:31:47.875Z]  runc:
+[2026-10-28T04:31:47.875Z]   Version:          1.5.2
+[2026-10-28T04:31:47.875Z]   GitCommit:        v1.5.2-0-g29dd3dc2
+[2026-10-28T04:31:47.875Z]  docker-init:
+[2026-10-28T04:31:47.875Z]   Version:          0.19.0
+[2026-10-28T04:31:47.875Z]   GitCommit:        de40ad0
+[2026-10-28T04:31:47.875Z] + docker buildx version
+[2026-10-28T04:31:47.875Z] github.com/docker/buildx v0.38.1 0dbe87f36ed472fe36b6796c3f70b4210a731fc5
+[2026-10-28T04:31:47.875Z] + kubectl version --client
+[2026-10-28T04:31:47.875Z] Client Version: v1.36.1
+[2026-10-28T04:31:47.875Z] Kustomize Version: v5.8.1
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build and Push Image)
+[Pipeline] sh
+[2026-10-28T04:31:48.321Z] + set -eu
+[2026-10-28T04:31:48.321Z] + docker buildx build --platform linux/arm64 --provenance=false --sbom=false --load -t crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176 ./app
+[2026-10-28T04:31:48.646Z] #0 building with "desktop-linux" instance using docker driver
+[2026-10-28T04:31:48.646Z] 
+[2026-10-28T04:31:48.646Z] #1 [internal] load build definition from Dockerfile
+[2026-10-28T04:31:48.646Z] #1 transferring dockerfile: 119B done
+[2026-10-28T04:31:48.646Z] #1 DONE 0.0s
+[2026-10-28T04:31:48.646Z] 
+[2026-10-28T04:31:48.646Z] #2 [internal] load metadata for docker.io/library/nginx:1.25-alpine
+[2026-10-28T04:31:50.814Z] #2 ...
+[2026-10-28T04:31:50.814Z] 
+[2026-10-28T04:31:50.814Z] #3 [auth] library/nginx:pull token for registry-1.docker.io
+[2026-10-28T04:31:50.814Z] #3 DONE 0.0s
+[2026-10-28T04:31:50.814Z] 
+[2026-10-28T04:31:50.814Z] #2 [internal] load metadata for docker.io/library/nginx:1.25-alpine
+[2026-10-28T04:31:53.020Z] #2 DONE 4.3s
+[2026-10-28T04:31:53.020Z] 
+[2026-10-28T04:31:53.020Z] #4 [internal] load .dockerignore
+[2026-10-28T04:31:53.020Z] #4 transferring context: 2B done
+[2026-10-28T04:31:53.020Z] #4 DONE 0.0s
+[2026-10-28T04:31:53.020Z] 
+[2026-10-28T04:31:53.020Z] #5 [internal] load build context
+[2026-10-28T04:31:53.020Z] #5 transferring context: 167B done
+[2026-10-28T04:31:53.020Z] #5 DONE 0.0s
+[2026-10-28T04:31:53.020Z] 
+[2026-10-28T04:31:53.020Z] #6 [1/2] FROM docker.io/library/nginx:1.25-alpine@sha256:516475cc129da42866742567714ddc681e5eed7b9ee0b9e9c015e464b4221a00
+[2026-10-28T04:31:53.020Z] #6 resolve docker.io/library/nginx:1.25-alpine@sha256:516475cc129da42866742567714ddc681e5eed7b9ee0b9e9c015e464b4221a00 done
+[2026-10-28T04:31:53.020Z] #6 DONE 0.0s
+[2026-10-28T04:31:53.020Z] 
+[2026-10-28T04:31:53.020Z] #7 [2/2] COPY index.html /usr/share/nginx/html/index.html
+[2026-10-28T04:31:53.020Z] #7 CACHED
+[2026-10-28T04:31:53.020Z] 
+[2026-10-28T04:31:53.020Z] #8 exporting to image
+[2026-10-28T04:31:53.020Z] #8 exporting layers done
+[2026-10-28T04:31:53.020Z] #8 exporting manifest sha256:78d432789f28456bb37d93221bff9627a05cd0ce4c71b4a3d14d02324f8ccc72 done
+[2026-10-28T04:31:53.020Z] #8 exporting config sha256:c10489f14680945f6b825292835e03d13006e6f4a2615f9ee2181b9402e5da9d done
+[2026-10-28T04:31:53.020Z] #8 naming to crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176 done
+[2026-10-28T04:31:53.020Z] #8 unpacking to crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176 done
+[2026-10-28T04:31:53.020Z] #8 DONE 0.0s
+[Pipeline] withCredentials
+[2026-10-28T04:31:53.072Z] Masking supported pattern matches of $REGISTRY_PASSWORD
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T04:31:53.453Z] + set +x
+[2026-10-28T04:32:04.021Z] Login Succeeded
+[2026-10-28T04:32:04.022Z] 
+[2026-10-28T04:32:04.022Z]  Info -> Using --platform pushes only the specified platform manifest of a multi-platform image index.
+[2026-10-28T04:32:04.022Z]          Other components, like attestations, will not be included.
+[2026-10-28T04:32:04.022Z]          To push the complete multi-platform image, remove the --platform flag.
+[2026-10-28T04:32:04.022Z]          
+[2026-10-28T04:32:04.022Z] The push refers to repository [crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo]
+[2026-10-28T04:32:04.347Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.347Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.347Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.347Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.347Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.347Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.347Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.347Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.347Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.347Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.347Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.347Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.641Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.641Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.641Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.641Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.641Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.641Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.641Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.641Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.641Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.641Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.641Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.641Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.966Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.966Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.966Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.966Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.966Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.966Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.966Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.966Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.966Z] a83296a673ce: Waiting
+[2026-10-28T04:32:04.966Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.966Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.966Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.966Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:04.966Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:04.966Z] bca4290a9639: Waiting
+[2026-10-28T04:32:04.966Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.289Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.289Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.289Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.289Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.289Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.289Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.289Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.289Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.289Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.289Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.289Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.289Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.595Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.595Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.595Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.595Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.595Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.595Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.595Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.595Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.595Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.595Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.595Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.595Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.914Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.914Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.914Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.914Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.914Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:05.914Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.914Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.914Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.914Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:05.914Z] bca4290a9639: Waiting
+[2026-10-28T04:32:05.914Z] a83296a673ce: Waiting
+[2026-10-28T04:32:05.914Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.185Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.185Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.185Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.185Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.185Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.185Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.185Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.185Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.185Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.185Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.185Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.185Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.456Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.456Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.456Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.456Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.456Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.456Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.456Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.456Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.780Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.780Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.780Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.780Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.780Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.780Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.780Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.780Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.780Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:06.780Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.780Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.780Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.780Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:06.780Z] bca4290a9639: Waiting
+[2026-10-28T04:32:06.780Z] a83296a673ce: Waiting
+[2026-10-28T04:32:06.780Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.096Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.096Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.096Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.096Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.096Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.096Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.096Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.096Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.096Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.096Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.096Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.096Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.401Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.401Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.401Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.401Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.401Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.401Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.401Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.401Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.401Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.401Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.401Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.401Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.724Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.724Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.724Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.724Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.724Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:07.724Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.724Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.724Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.724Z] bca4290a9639: Waiting
+[2026-10-28T04:32:07.724Z] a83296a673ce: Waiting
+[2026-10-28T04:32:07.724Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:07.724Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.047Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.047Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.047Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.047Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.047Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.047Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.047Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.047Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.047Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.047Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.047Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.047Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.372Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.372Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.372Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.372Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.372Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.372Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.372Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.372Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.372Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.372Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.372Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.372Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.372Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.372Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.372Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.372Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.682Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.682Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.682Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.682Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.682Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.682Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.682Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.682Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:08.682Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:08.682Z] bca4290a9639: Waiting
+[2026-10-28T04:32:08.682Z] a83296a673ce: Waiting
+[2026-10-28T04:32:08.682Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.002Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.002Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.002Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.002Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.002Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.002Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.002Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.002Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.002Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.002Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.002Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.002Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.324Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.324Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.324Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.324Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.324Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.324Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.324Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.324Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.324Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.324Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.324Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.324Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.647Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.647Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.647Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.647Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.647Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.647Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.647Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.647Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.647Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.647Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.647Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.647Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.969Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.969Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.969Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.969Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.969Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.969Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.969Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.969Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.969Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.969Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.969Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.969Z] a83296a673ce: Waiting
+[2026-10-28T04:32:09.969Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:09.969Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:09.969Z] bca4290a9639: Waiting
+[2026-10-28T04:32:09.969Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.245Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.245Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.245Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.245Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.245Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.245Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.245Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.245Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.497Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.497Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.497Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.497Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.497Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.497Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.497Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.497Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.497Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.497Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.497Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.497Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.822Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.822Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.822Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.822Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.822Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:10.822Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.822Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.822Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.822Z] bca4290a9639: Waiting
+[2026-10-28T04:32:10.822Z] a83296a673ce: Waiting
+[2026-10-28T04:32:10.822Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:10.822Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.148Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.148Z] bca4290a9639: Waiting
+[2026-10-28T04:32:11.148Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.148Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:11.148Z] bca4290a9639: Waiting
+[2026-10-28T04:32:11.148Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.148Z] ddf9db5a05cb: Waiting
+[2026-10-28T04:32:11.148Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.148Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.148Z] bca4290a9639: Layer already exists
+[2026-10-28T04:32:11.148Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.148Z] ddf9db5a05cb: Layer already exists
+[2026-10-28T04:32:11.148Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.148Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.472Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.472Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.472Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.472Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.472Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.472Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.472Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.472Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.472Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.472Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.472Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.472Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.472Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.472Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.472Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.472Z] b4f3127eb622: Waiting
+[2026-10-28T04:32:11.796Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:11.796Z] a83296a673ce: Waiting
+[2026-10-28T04:32:11.796Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.796Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.796Z] b4f3127eb622: Layer already exists
+[2026-10-28T04:32:11.796Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:11.796Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:11.796Z] a83296a673ce: Layer already exists
+[2026-10-28T04:32:11.796Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.796Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.796Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:11.796Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:11.796Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:11.796Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.071Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.071Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.071Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.071Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:12.071Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.071Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.071Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:12.071Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.071Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.071Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.071Z] 166b80e00f74: Waiting
+[2026-10-28T04:32:12.071Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.379Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.379Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.379Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.379Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.379Z] 166b80e00f74: Layer already exists
+[2026-10-28T04:32:12.379Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.379Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.379Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.379Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.379Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.379Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.379Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.379Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.704Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.704Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.704Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.704Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.704Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.704Z] 98ff282c4466: Waiting
+[2026-10-28T04:32:12.704Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.704Z] 182e691fb2cc: Waiting
+[2026-10-28T04:32:12.704Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:12.704Z] 98ff282c4466: Layer already exists
+[2026-10-28T04:32:12.704Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:12.704Z] 182e691fb2cc: Layer already exists
+[2026-10-28T04:32:13.023Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:13.023Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:13.023Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:13.023Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:13.023Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:13.023Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:13.346Z] 4f6b4e3940df: Waiting
+[2026-10-28T04:32:13.346Z] 01e0575f0dee: Waiting
+[2026-10-28T04:32:13.346Z] 4f6b4e3940df: Layer already exists
+[2026-10-28T04:32:13.346Z] 01e0575f0dee: Layer already exists
+[2026-10-28T04:32:14.421Z] 1ff38fb17176: digest: sha256:78d432789f28456bb37d93221bff9627a05cd0ce4c71b4a3d14d02324f8ccc72 size: 1997
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Kubernetes)
+[Pipeline] withCredentials
+[2026-10-28T04:32:14.614Z] Masking supported pattern matches of $KUBECONFIG_FILE
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T04:32:14.982Z] + set +x
+[2026-10-28T04:32:14.982Z] namespace/training unchanged
+[2026-10-28T04:32:14.982Z] secret/cd-demo-acr-pull
+[2026-10-28T04:32:14.982Z] service/cd-demo-service unchanged
+[2026-10-28T04:32:14.982Z] ingress.networking.k8s.io/cd-demo-ingress unchanged
+[2026-10-28T04:32:14.982Z] deployment.apps/cd-demo-deployment configured
+[2026-10-28T04:32:14.982Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+[2026-10-28T04:32:33.719Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+[2026-10-28T04:32:33.719Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 out of 3 new replicas have been updated...
+[2026-10-28T04:32:33.719Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+[2026-10-28T04:32:33.719Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+[2026-10-28T04:32:46.572Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+[2026-10-28T04:32:46.572Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 2 out of 3 new replicas have been updated...
+[2026-10-28T04:32:46.572Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 old replicas are pending termination...
+[2026-10-28T04:32:46.572Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 old replicas are pending termination...
+[2026-10-28T04:32:57.124Z] Waiting for deployment "cd-demo-deployment" rollout to finish: 1 old replicas are pending termination...
+[2026-10-28T04:32:57.124Z] deployment "cd-demo-deployment" successfully rolled out
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify)
+[Pipeline] withCredentials
+[2026-10-28T04:32:57.356Z] Masking supported pattern matches of $KUBECONFIG_FILE
+[Pipeline] {
+[Pipeline] sh
+[2026-10-28T04:32:57.692Z] + set +x
+[2026-10-28T04:32:57.692Z] NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                                                                               SELECTOR
+[2026-10-28T04:32:57.692Z] deployment.apps/cd-demo-deployment   3/3     3            3           11h   cd-demo      crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176   app=cd-demo
+[2026-10-28T04:32:57.692Z] 
+[2026-10-28T04:32:57.692Z] NAME                                      READY   STATUS    RESTARTS   AGE   IP            NODE                         NOMINATED NODE   READINESS GATES
+[2026-10-28T04:32:57.692Z] pod/cd-demo-deployment-86d87f45f7-cl5jq   1/1     Running   0          43s   10.244.0.23   k8s-chapter1-control-plane   <none>           <none>
+[2026-10-28T04:32:57.692Z] pod/cd-demo-deployment-86d87f45f7-cxj9d   1/1     Running   0          13s   10.244.0.25   k8s-chapter1-control-plane   <none>           <none>
+[2026-10-28T04:32:57.692Z] pod/cd-demo-deployment-86d87f45f7-vp25w   1/1     Running   0          24s   10.244.0.24   k8s-chapter1-control-plane   <none>           <none>
+[2026-10-28T04:32:57.692Z] 
+[2026-10-28T04:32:57.692Z] NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+[2026-10-28T04:32:57.692Z] service/cd-demo-service   ClusterIP   10.96.255.9   <none>        80/TCP    11h   app=cd-demo
+[2026-10-28T04:32:57.692Z] 
+[2026-10-28T04:32:57.692Z] NAME                                        CLASS   HOSTS           ADDRESS       PORTS   AGE
+[2026-10-28T04:32:57.692Z] ingress.networking.k8s.io/cd-demo-ingress   nginx   cd-demo.local   10.96.59.62   80      11h
+[2026-10-28T04:32:57.692Z] NAME                    ADDRESSTYPE   PORTS   ENDPOINTS                             AGE
+[2026-10-28T04:32:57.692Z] cd-demo-service-2kzgs   IPv4          80      10.244.0.23,10.244.0.24,10.244.0.25   11h
+[2026-10-28T04:32:57.692Z] deployment.apps/cd-demo-deployment 
+[2026-10-28T04:32:57.692Z] REVISION  CHANGE-CAUSE
+[2026-10-28T04:32:57.692Z] 1         <none>
+[2026-10-28T04:32:57.692Z] 2         <none>
+[2026-10-28T04:32:57.692Z] 3         <none>
+[2026-10-28T04:32:57.692Z] 4         <none>
+[2026-10-28T04:32:57.692Z] 
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+[2026-10-28T04:32:57.886Z] Deployment completed successfully: crpi-uzkholcdutt858o7.cn-guangzhou.personal.cr.aliyuncs.com/maxfan/kubernetes-cd-demo:1ff38fb17176
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
